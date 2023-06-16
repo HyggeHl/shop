@@ -18,10 +18,34 @@
   </parent>
 
   <dependencies>
+
+    <!--集成nacos-->
+    <dependency>
+      <groupId>com.alibaba.cloud</groupId>
+      <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba.cloud</groupId>
+      <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-bootstrap</artifactId>
+    </dependency>
     <!--shop通用模块-->
     <dependency>
       <groupId>com.hygge.shop</groupId>
       <artifactId>shop-common</artifactId>
+    </dependency>
+    <!--shop安全模块-->
+    <dependency>
+      <groupId>com.hygge.shop</groupId>
+      <artifactId>shop-security</artifactId>
+    </dependency>
+    <!--shop admin 模块-->
+    <dependency>
+      <groupId>com.hygge.shop</groupId>
+      <artifactId>shop-admin</artifactId>
     </dependency>
     <!--AOP and AspectJ-->
     <dependency>
@@ -53,12 +77,29 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-amqp</artifactId>
     </dependency>
-    <!--swagger-->
-    <dependency>
-      <groupId>io.springfox</groupId>
-      <artifactId>springfox-boot-starter</artifactId>
-    </dependency>
   </dependencies>
+
+<!--  <build>-->
+<!--    <plugins>-->
+<!--      <plugin>-->
+<!--        <groupId>org.springframework.boot</groupId>-->
+<!--        <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--        <configuration>-->
+<!--          &lt;!&ndash; 指定该Main Class为全局的唯一入口 &ndash;&gt;-->
+<!--          <mainClass>com.hygge.shop.mall.ShopMallApplication</mainClass>-->
+<!--          <layout>ZIP</layout>-->
+<!--        </configuration>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <goals>-->
+<!--              &lt;!&ndash;可以把依赖的包都打包到生成的Jar包中&ndash;&gt;-->
+<!--              <goal>repackage</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
+<!--    </plugins>-->
+<!--  </build>-->
 
   <build>
     <plugins>

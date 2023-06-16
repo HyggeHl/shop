@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: shop-stock
+  profiles:
+    active: dev
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+jwt:
+  tokenHeader: Authorization #JWT存储的请求头
+  secret: mall-portal-secret #JWT加解密使用的密钥
+  expiration: 604800 #JWT的超期限时间(60*60*24*7)
+  tokenHead: 'Bearer '  #JWT负载中拿到开头
+
+# 自定义redis key
+redis:
+  database: shop
+  key:
+    authCode: 'ums:authCode'
+    orderId: 'oms:orderId'
+    member: 'ums:member'
+    stock: 'pms:stock'
+    stockLock: 'pms:stockLock'
+  expire:
+    authCode: 90 # 验证码超期时间
+    stockLock: 10 # 商品库存锁超期时间
+    common: 86400 # 24小时
+
+secure:
+  ignored:
+    urls: #安全路径白名单
+      - /swagger-ui/
+      - /swagger-resources/**
+      - /**/v3/api-docs
+      - /**/*.html
+      - /**/*.js
+      - /**/*.css
+      - /**/*.png
+      - /**/*.map
+      - /favicon.ico
+      - /actuator/**
+      - /druid/**
+      - /admin/login
+      - /admin/register
+      - /admin/info
+      - /admin/logout
+      - /minio/upload
+      #      - /test/hello
+      - /umsAdmin/login
+      - /umsMember/getCaptcha
+      #UmsMember
+      - /umsMember/register
+      - /umsMember/login
+      #PmsProduct
+      - /pmsProduct/**
+      - /omsStock/**

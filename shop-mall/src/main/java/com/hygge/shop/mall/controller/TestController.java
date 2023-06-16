@@ -1,7 +1,9 @@
 package com.hygge.shop.mall.controller;
 
-import com.hygge.shop.shopcommon.service.CommonServiceTest;
+
+import com.hygge.shop.common.service.CommonServiceTest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.FilterChainProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

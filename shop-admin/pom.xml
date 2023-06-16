@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.hygge.shop</groupId>
+  <artifactId>shop-admin</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>shop-admin</name>
+  <description>shop-admin</description>
+
+  <parent>
+    <groupId>com.hygge.shop</groupId>
+    <artifactId>shop</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <dependencies>
+    <!--shop通用模块-->
+    <dependency>
+      <groupId>com.hygge.shop</groupId>
+      <artifactId>shop-common</artifactId>
+    </dependency>
+    <!--shop安全模块-->
+    <dependency>
+      <groupId>com.hygge.shop</groupId>
+      <artifactId>shop-security</artifactId>
+    </dependency>
+    <!--集成druid连接池-->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid-spring-boot-starter</artifactId>
+    </dependency>
+    <!--MyBatis-plus-->
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-boot-starter</artifactId>
+    </dependency>
+    <!--Mysql数据库驱动-->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+    </dependency>
+    <!--图形验证码相关-->
+    <dependency>
+      <groupId>com.github.penggle</groupId>
+      <artifactId>kaptcha</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.jhlabs</groupId>
+      <artifactId>filters</artifactId>
+    </dependency>
+  </dependencies>
+</project>
