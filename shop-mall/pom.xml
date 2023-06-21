@@ -43,10 +43,10 @@
       <artifactId>shop-security</artifactId>
     </dependency>
     <!--shop admin 模块-->
-    <dependency>
-      <groupId>com.hygge.shop</groupId>
-      <artifactId>shop-admin</artifactId>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>com.hygge.shop</groupId>-->
+<!--      <artifactId>shop-admin</artifactId>-->
+<!--    </dependency>-->
     <!--AOP and AspectJ-->
     <dependency>
       <groupId>org.springframework.boot</groupId>

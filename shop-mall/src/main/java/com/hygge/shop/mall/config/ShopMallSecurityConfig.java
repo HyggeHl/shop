@@ -1,7 +1,7 @@
 package com.hygge.shop.mall.config;
 
-import com.hygge.shop.admin.entity.UmsResource;
-import com.hygge.shop.admin.service.UmsResourceService;
+import com.hygge.shop.mall.entity.UmsResource;
+import com.hygge.shop.mall.service.UmsResourceService;
 import com.hygge.shop.mall.service.UmsMemberService;
 import com.hygge.shop.security.shopsecurity.component.DynamicSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
