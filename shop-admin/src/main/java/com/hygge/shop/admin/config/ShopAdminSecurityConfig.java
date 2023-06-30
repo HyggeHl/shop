@@ -20,33 +20,33 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author: hygge
  * @create: 2023/04/19
  */
-//@Configuration
-//public class ShopAdminSecurityConfig {
-//
-//  @Autowired
-//  private UmsAdminService adminService;
-//  @Autowired
-//  private UmsResourceService resourceService;
-//
-//  @Bean
-//  public UserDetailsService userDetailsService() {
-//    //获取登录用户信息
-//    return username -> adminService.loadUserByUsername(username);
-//  }
-//
-//  @Bean
-//  public DynamicSecurityService dynamicSecurityService() {
-//    return new DynamicSecurityService() {
-//      @Override
-//      public Map<String, ConfigAttribute> loadDataSource() {
-//        Map<String, ConfigAttribute> map = new ConcurrentHashMap<>();
-//        List<UmsResource> resourceList = resourceService.listAll();
-//        for (UmsResource resource : resourceList) {
-//          map.put(resource.getUrl(), new org.springframework.security.access.SecurityConfig(resource.getId() + ":" + resource.getName()));
-//        }
-//        return map;
-//      }
-//    };
-//  }
-//
-//}
+@Configuration
+public class ShopAdminSecurityConfig {
+
+  @Autowired
+  private UmsAdminService adminService;
+  @Autowired
+  private UmsResourceService resourceService;
+
+  @Bean
+  public UserDetailsService userDetailsService() {
+    //获取登录用户信息
+    return phone -> adminService.loadUserByPhone(phone);
+  }
+
+  @Bean
+  public DynamicSecurityService dynamicSecurityService() {
+    return new DynamicSecurityService() {
+      @Override
+      public Map<String, ConfigAttribute> loadDataSource() {
+        Map<String, ConfigAttribute> map = new ConcurrentHashMap<>();
+        List<UmsResource> resourceList = resourceService.listAll();
+        for (UmsResource resource : resourceList) {
+          map.put(resource.getUrl(), new org.springframework.security.access.SecurityConfig(resource.getId() + ":" + resource.getName()));
+        }
+        return map;
+      }
+    };
+  }
+
+}

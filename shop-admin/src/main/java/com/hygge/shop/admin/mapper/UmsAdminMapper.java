@@ -22,14 +22,17 @@ public interface UmsAdminMapper extends BaseMapper<UmsAdmin> {
   
   @Select("<script>" 
     + "select"
-    + " id, username, password, icon, email, nick_name, note, create_time, login_time, status "
+    + " id, phone, username, password, icon, email, nick_name, note, create_time, login_time, status "
     + "from ums_admin"
     + "<where>"
     + "<if test='username != null'>"
     + "  username = #{username}"
     + "</if>"
+    + "<if test='phone != null'>"
+    + "phone = #{phone}"
+    + "</if>"
     + "</where>"
     + "</script>")
-  List<UmsAdmin>  selectByUsername(String username);
+  List<UmsAdmin>  selectByUmsAdmin(UmsAdmin umsAdmin);
 
 }

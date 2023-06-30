@@ -3,9 +3,12 @@ package com.hygge.shop.admin.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import com.hygge.shop.admin.entity.UmsAdmin;
 import com.hygge.shop.admin.mapper.UmsAdminRoleRelationMapper;
+import com.hygge.shop.admin.service.UmsAdminCacheService;
 import com.hygge.shop.admin.service.UmsAdminService;
+import com.hygge.shop.common.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,95 +19,28 @@ import java.util.stream.Collectors;
  * @author: hygge
  * @create: 2023/04/19
  */
-public class UmsAdminCacheServiceImpl {
-//  @Autowired
-//  private UmsAdminService adminService;
-//  @Autowired
-////  private RedisService redisService;
-//  @Autowired
-//  private UmsAdminRoleRelationMapper adminRoleRelationMapper;
-//  @Autowired
-//  private UmsAdminRoleRelationDao adminRoleRelationDao;
-//  @Value("${redis.database}")
-//  private String REDIS_DATABASE;
-//  @Value("${redis.expire.common}")
-//  private Long REDIS_EXPIRE;
-//  @Value("${redis.key.admin}")
-//  private String REDIS_KEY_ADMIN;
-//  @Value("${redis.key.resourceList}")
-//  private String REDIS_KEY_RESOURCE_LIST;
+@Service
+public class UmsAdminCacheServiceImpl implements UmsAdminCacheService {
+  @Autowired
+  private RedisService redisService;
 
-//  @Override
-//  public void delAdmin(Long adminId) {
-//    UmsAdmin admin = adminService.getItem(adminId);
-//    if (admin != null) {
-//      String key = REDIS_DATABASE + ":" + REDIS_KEY_ADMIN + ":" + admin.getUsername();
-//      redisService.del(key);
-//    }
-//  }
+  @Value("${redis.database}")
+  private String REDIS_DATABASE;
+  @Value("${redis.key.authCode}")
+  private String REDIS_KEY_AUTHCODE;
+  @Value("${redis.expire.authCode}")
+  private Long REDIS_EXPIRE_AUTHCODE;
 
-//  @Override
-//  public void delResourceList(Long adminId) {
-//    String key = REDIS_DATABASE + ":" + REDIS_KEY_RESOURCE_LIST + ":" + adminId;
-//    redisService.del(key);
-//  }
+  @Override
+  public void setAuthCode(String tel, String authCode) {
+    String key = REDIS_DATABASE + ":" + REDIS_KEY_AUTHCODE + ":" + tel;
+    redisService.set(key, authCode, REDIS_EXPIRE_AUTHCODE);
+  }
 
-//  @Override
-//  public void delResourceListByRole(Long roleId) {
-//    UmsAdminRoleRelationExample example = new UmsAdminRoleRelationExample();
-//    example.createCriteria().andRoleIdEqualTo(roleId);
-//    List<UmsAdminRoleRelation> relationList = adminRoleRelationMapper.selectByExample(example);
-//    if (CollUtil.isNotEmpty(relationList)) {
-//      String keyPrefix = REDIS_DATABASE + ":" + REDIS_KEY_RESOURCE_LIST + ":";
-//      List<String> keys = relationList.stream().map(relation -> keyPrefix + relation.getAdminId()).collect(Collectors.toList());
-//      redisService.del(keys);
-//    }
-//  }
-
-//  @Override
-//  public void delResourceListByRoleIds(List<Long> roleIds) {
-//    UmsAdminRoleRelationExample example = new UmsAdminRoleRelationExample();
-//    example.createCriteria().andRoleIdIn(roleIds);
-//    List<UmsAdminRoleRelation> relationList = adminRoleRelationMapper.selectByExample(example);
-//    if (CollUtil.isNotEmpty(relationList)) {
-//      String keyPrefix = REDIS_DATABASE + ":" + REDIS_KEY_RESOURCE_LIST + ":";
-//      List<String> keys = relationList.stream().map(relation -> keyPrefix + relation.getAdminId()).collect(Collectors.toList());
-//      redisService.del(keys);
-//    }
-//  }
-
-//  @Override
-//  public void delResourceListByResource(Long resourceId) {
-//    List<Long> adminIdList = adminRoleRelationDao.getAdminIdList(resourceId);
-//    if (CollUtil.isNotEmpty(adminIdList)) {
-//      String keyPrefix = REDIS_DATABASE + ":" + REDIS_KEY_RESOURCE_LIST + ":";
-//      List<String> keys = adminIdList.stream().map(adminId -> keyPrefix + adminId).collect(Collectors.toList());
-//      redisService.del(keys);
-//    }
-//  }
-
-//  @Override
-//  public UmsAdmin getAdmin(String username) {
-//    String key = REDIS_DATABASE + ":" + REDIS_KEY_ADMIN + ":" + username;
-//    return (UmsAdmin) redisService.get(key);
-//  }
-
-//  @Override
-//  public void setAdmin(UmsAdmin admin) {
-//    String key = REDIS_DATABASE + ":" + REDIS_KEY_ADMIN + ":" + admin.getUsername();
-//    redisService.set(key, admin, REDIS_EXPIRE);
-//  }
-//
-//  @Override
-//  public List<UmsResource> getResourceList(Long adminId) {
-//    String key = REDIS_DATABASE + ":" + REDIS_KEY_RESOURCE_LIST + ":" + adminId;
-//    return (List<UmsResource>) redisService.get(key);
-//  }
-//
-//  @Override
-//  public void setResourceList(Long adminId, List<UmsResource> resourceList) {
-//    String key = REDIS_DATABASE + ":" + REDIS_KEY_RESOURCE_LIST + ":" + adminId;
-//    redisService.set(key, resourceList, REDIS_EXPIRE);
-//  }
+  @Override
+  public String getAuthCode(String tel) {
+    String key = REDIS_DATABASE + ":" + REDIS_KEY_AUTHCODE + ":" + tel;
+    return (String) redisService.get(key);
+  }
 
 }

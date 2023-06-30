@@ -30,6 +30,13 @@ public class UmsAdmin implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
+    @TableField("phone")
+    private String phone;
+
+    @ApiModelProperty("验证码")
+    @TableField(exist = false)
+    private String authCode;
+
     @TableField("username")
     private String username;
 

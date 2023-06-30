@@ -1,5 +1,6 @@
 package com.hygge.shop.admin.service;
 
+import com.hygge.shop.admin.entity.AdminDetails;
 import com.hygge.shop.admin.entity.UmsAdmin;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hygge.shop.admin.entity.UmsResource;
@@ -20,69 +21,19 @@ import java.util.List;
 public interface UmsAdminService extends IService<UmsAdmin> {
 
   /**
-   * 根据用户名获取后台管理员
+   * 根据用户名获取会员
    */
-  UmsAdmin getAdminByUsername(String username);
-
-//  /**
-//   * 注册功能
-//   */
-//  UmsAdmin register(UmsAdminParam umsAdminParam);
+  UmsAdmin getByUsername(String username);
 
   /**
-   * 登录功能
-   * @param username 用户名
-   * @param password 密码
-   * @return 生成的JWT的token
+   * 根据手机号获取会员
    */
-  String login(String username,String password);
-
-//  /**
-//   * 刷新token的功能
-//   * @param oldToken 旧的token
-//   */
-//  String refreshToken(String oldToken);
-//
-//  /**
-//   * 根据用户id获取用户
-//   */
-//  UmsAdmin getItem(Long id);
-//
-//  /**
-//   * 根据用户名或昵称分页查询用户
-//   */
-//  List<UmsAdmin> list(String keyword, Integer pageSize, Integer pageNum);
-//
-//  /**
-//   * 修改指定用户信息
-//   */
-//  int update(Long id, UmsAdmin admin);
-//
-//  /**
-//   * 删除指定用户
-//   */
-//  int delete(Long id);
-//
-//  /**
-//   * 修改用户角色关系
-//   */
-//  @Transactional
-//  int updateRole(Long adminId, List<Long> roleIds);
-//
-//  /**
-//   * 获取用户对应角色
-//   */
-//  List<UmsRole> getRoleList(Long adminId);
+  UmsAdmin getByPhone(String phone);
 
   /**
-   * 获取指定用户的可访问资源
+   * 用户注册
    */
-  List<UmsResource> getResourceList(Long adminId);
-
-//  /**
-//   * 修改密码
-//   */
-//  int updatePassword(UpdateAdminPasswordParam updatePasswordParam);
+  void register(UmsAdmin umsMember);
 
   /**
    * 获取用户信息
@@ -90,7 +41,17 @@ public interface UmsAdminService extends IService<UmsAdmin> {
   UserDetails loadUserByUsername(String username);
 
   /**
-   * 获取缓存服务
+   * 获取用户信息
    */
-  UmsAdminCacheService getCacheService();
+  AdminDetails loadUserByPhone(String phone);
+
+  /**
+   * 获取当前登录会员
+   */
+  UmsAdmin getCurrentAdmin();
+
+  /**
+   * 登录后获取token
+   */
+  String login(UmsAdmin umsMember);
 }
